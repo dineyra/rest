@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Admin panel</title>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="w-100 p-3">
+                    <div class="col-12">
+
+
+                        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+                            <div>
+                                <a class="navbar-brand" id="headerName"></a>
+                                <a class="navbar-brand">with roles: </a>
+                                <a class="navbar-brand" id="headerRoles"></a>
+                            </div>
+                            <div class="collapse navbar-collapse d-flex justify-content-end navbar-nav" id="navbarSupportedContent">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </div>
+                           </nav>
+
+                           <br>
+
+                           <div class="row">
+
+
+                            <div class="col-2">
+                                <ul class="nav flex-column nav-pills">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="/admin">Admin</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"  href="/admin/profile">User</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <div class="col-md-10">
+
+
+                                <div class="page-header">
+                                    <h1>
+                                        Admin panel
+                                    </h1>
+                                </div>
+
+
+
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="/admin">User table</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab"  href="admin/new" id ="newUserForm">New User</a>
+                                    </li>
+                                </ul>
+
+
+                                <div id="tables-holder">
+                                    <div class="border">
+                                        <table class="table border">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">All users</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+
+                                        <div class="col-md-12">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-striped" id="mainTableWithUsers">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Username</th>
+                                                        <th>Age</th>
+                                                        <th>Email</th>
+                                                        <th>Password</th>
+                                                        <th>Role</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="userEditModal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-edit-user" aria-hidden="true">
+    <form id = "modalEditForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-edit-user">Edit user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label  for="userId" class="col-form-label">ID</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="userId" class="form-control"
+                               readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="userUsername" class="col-form-label">Username</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="userUsername" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="age" class="col-form-label">Age</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="age" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="email" class="col-form-label">Email</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="email" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="password" class="col-form-label">Password</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="password" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="roles" class="fs-5 fw-bold pb-0 pt-2">Role</label>
+                        </div>
+                        <select class="custom-select form-control" size="2"
+                                id="roles" multiple required>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="modal fade" id="userDeleteModal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-delete-user" aria-hidden="true">
+    <form id = "modalDeleteForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-delete-user">Edit user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label  for="userDeleteId" class="col-form-label">ID</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="userDeleteId" class="form-control"
+                               readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="userDeleteUsername" class="col-form-label">Username</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="userDeleteUsername" class="form-control"
+                               readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="ageDelete" class="col-form-label">Age</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="ageDelete" class="form-control"
+                               readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="emailDelete" class="col-form-label">Email</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="emailDelete" class="form-control"
+                               readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="passwordDelete" class="col-form-label">Password</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="passwordDelete" class="form-control"
+                               readonly="readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="text-align: center">
+                            <label for="rolesDelete" class="fs-5 fw-bold pb-0 pt-2">Role</label>
+                        </div>
+                        <input type="text" style="width: 200px; margin: auto" id="rolesDelete" class="form-control"
+                               readonly="readonly">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+
+
+<script src="webjars/jquery/3.6.1/jquery.js"></script>
+<script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/main.js"></script>
+<script type="text/javascript" src="/profile.js"></script>
+</body>
+</html>
