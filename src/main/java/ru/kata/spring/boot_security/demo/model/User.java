@@ -1,26 +1,29 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
-
-import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import java.util.*;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
-
+//@Entity
+//@Table(name = "users")
+//@NamedEntityGraph(name = "graph.User.roles",
+//        attributeNodes = @NamedAttributeNode("roles"))
 @Entity
-@Table(name = "user")
-@NamedEntityGraph(name = "graph.User.roles",
-        attributeNodes = @NamedAttributeNode("roles"))
+@Table(name = "users")
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
 public class User{
 
     public User() {
@@ -37,7 +40,7 @@ public class User{
     private String userName;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

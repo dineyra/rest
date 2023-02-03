@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface UsersRepository extends JpaRepository<User, Integer> {
-    @EntityGraph(value = "graph.User.roles", type = EntityGraph.EntityGraphType.LOAD)
+//    @EntityGraph(value = "graph.User.roles", type = EntityGraph.EntityGraphType.LOAD)
     Optional<User> findByUserName(String username);
 }
